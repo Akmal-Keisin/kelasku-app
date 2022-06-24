@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class DeviceToken extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'user_token',
+        'device_token'
+    ];
 }
