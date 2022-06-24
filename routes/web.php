@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +18,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/auth/login', [AuthController::class, 'authLogin']);
 });
+
+// Route::middleware(['auth'])->group(function () {
+Route::resource('/kelasku', UserController::class);
+Route::resource('/admin', AdminController::class)->except('show');
+Route::get('/', function () {
+    return redirect('/kelasku');
+});
+Route::post('/auth/logout', [AuthController::class, 'authLogout']);
+// });
+
+Route::get('/test', [TestController::class, 'index']);
+Route::post('/test', [TestController::class, 'send']);
