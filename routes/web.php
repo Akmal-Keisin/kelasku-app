@@ -31,6 +31,3 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::post('/auth/logout', [AuthController::class, 'authLogout']);
 });
-
-Route::get('/test', [TestController::class, 'index']);
-Route::post('/test', [TestController::class, 'send']);
