@@ -143,7 +143,8 @@ class UserApiController extends Controller
             }
             $data = $request->all();
             if ($request->file('photo')) {
-                Storage::delete($user->photo);
+                $image = explode($user->photo, env('APP_URL'));
+                Storage::delete($image[1]);
                 $data['photo'] = $request->file('photo')->store('images');
             } else {
                 $data['photo'] = $user->photo;

@@ -51,7 +51,7 @@ class UserController extends Controller
             'password_confirmation' => 'same:password'
         ]);
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('images');
+            $data['photo'] = env('APP_URL') . '/' . $request->file('photo')->store('images');
             // $data['photo'] = Storage::disk('public')->put($request->file('photo'), 'images');
         } else {
             $data['photo'] = 'images/default.png';
@@ -86,8 +86,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         if ($request->hasFile('photo')) {
             // $data['photo'] = $request->file('photo')->store('images');
-            Storage::delete($user->photo);
-            $data['photo'] = $request->file('photo')->store('images');
+            $image = explode($user->photo, env('APP_URL'));
+            Storage::delete($image[1]);
+            $data['photo'] = env('APP_URL') . '/' . $request->file('photo')->store('images');
         } else {
             $data['photo'] = $user->photo;
         }
@@ -104,9 +105,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        if ($user->photo !== 'images/default.png') {
-            Storage::delete($user->photo);
-        }
+        $image = explode($user->photo, env('APP_URL'));
+        Storage::delete($image[1]);
         $user->delete();
         return redirect('/kelasku')->with('success', 'Data Deleted SUccessfully');
     }
