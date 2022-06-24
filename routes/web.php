@@ -23,14 +23,14 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/auth/login', [AuthController::class, 'authLogin']);
 });
 
-// Route::middleware(['auth'])->group(function () {
-Route::resource('/kelasku', UserController::class);
-Route::resource('/admin', AdminController::class)->except('show');
-Route::get('/', function () {
-    return redirect('/kelasku');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/kelasku', UserController::class);
+    Route::resource('/admin', AdminController::class)->except('show');
+    Route::get('/', function () {
+        return redirect('/kelasku');
+    });
+    Route::post('/auth/logout', [AuthController::class, 'authLogout']);
 });
-Route::post('/auth/logout', [AuthController::class, 'authLogout']);
-// });
 
 Route::get('/test', [TestController::class, 'index']);
 Route::post('/test', [TestController::class, 'send']);
