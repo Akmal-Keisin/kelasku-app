@@ -10,7 +10,7 @@
                 <div class="alert alert-success">{{ $msg }}</div>
             @endif
             <div class="mb-3">
-                <a href="admin/create" class="btn btn-primary">Add+</a>
+                <a href="{{ env('APP_URL') }}/admin/create" class="btn btn-primary">Add+</a>
             </div>
         </div>
         <table class="table table-responsive table-striped align-middle">
@@ -28,8 +28,8 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->email }}</td>
                     <td>
-                        <a href="admin/{{ $item->id }}/edit" class="btn btn-warning">Edit</a>
-                        <form action="/admin/{{ $item->id }}" method="POST" class="d-inline-block">
+                        <a href="{{ env("APP_URL") }}/admin/{{ $item->id }}/edit" class="btn btn-warning">Edit</a>
+                        <form action="{{ env("APP_URL") }}/admin/{{ $item->id }}" method="POST" class="d-inline-block">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-danger" onclick="return confirm('Are You Sure?')">Delete</button>

@@ -16,7 +16,7 @@
         @elseif ($msg = Session::get('fail'))
             <div class="alert alert-danger">{{ $msg }}</div>
         @endif
-        <form action="/admin/{{ $admin->id }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ env("APP_URL") }}/admin/{{ $admin->id }}" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="mb-3">

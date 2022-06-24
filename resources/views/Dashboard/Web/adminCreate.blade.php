@@ -14,7 +14,7 @@
                 </ul>
             </div>
         @endif
-        <form action="/admin" method="POST" enctype="multipart/form-data">
+        <form action="{{ env('APP_URL') }}/admin" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="email" class="form-label">Email :</label>

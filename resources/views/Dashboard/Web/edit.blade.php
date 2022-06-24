@@ -14,7 +14,7 @@
                 </ul>
             </div>
         @endif
-        <form action="/kelasku/{{ $user->id }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ env('APP_URL') }}/kelasku/{{ $user->id }}" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="mb-3">

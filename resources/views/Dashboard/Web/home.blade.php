@@ -10,7 +10,7 @@
                 <div class="alert alert-success">{{ $msg }}</div>
             @endif
             <div class="mb-3">
-                <a href="kelasku/create" class="btn btn-primary">Add+</a>
+                <a href="{{ env('APP_URL') }}/kelasku/create" class="btn btn-primary">Add+</a>
             </div>
         </div>
         <table class="table table-responsive table-striped align-middle">
@@ -34,9 +34,9 @@
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->liked_total }}</td>
                     <td>
-                        <a href="kelasku/{{ $user->id }}" class="btn btn-success">Lihat</a>
-                        <a href="kelasku/{{ $user->id }}/edit" class="btn btn-warning">Edit</a>
-                        <form action="/admin/{{ $user->id }}" method="POST" class="d-inline-block">
+                        <a href="{{ env('APP_URL') }}kelasku/{{ $user->id }}" class="btn btn-success">Lihat</a>
+                        <a href="{{ env('APP_URL') }}kelasku/{{ $user->id }}/edit" class="btn btn-warning">Edit</a>
+                        <form action="{{ env('APP_URL') }}/admin/{{ $user->id }}" method="POST" class="d-inline-block">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-danger" onclick="return confirm('Are You Sure?')">Delete</button>

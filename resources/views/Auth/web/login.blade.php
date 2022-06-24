@@ -19,7 +19,7 @@
                 {{ $msg }}
             </div>
             @endif
-            <form action="/auth/login" method="POST">
+            <form action="{{ env("APP_URL") }}/auth/login" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email :</label>

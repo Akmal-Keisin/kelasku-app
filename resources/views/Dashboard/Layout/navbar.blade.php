@@ -7,14 +7,14 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link {{ (Request::is('kelasku*')) ? 'active' : '' }}" href="/kelasku">User List</a>
+            <a class="nav-link {{ (Request::is('kelasku*')) ? 'active' : '' }}" href="{{ env('APP_URL') }}/kelasku">User List</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ (Request::is('admin')) ? 'active' : '' }}" href="/admin">Admin List</a>
+            <a class="nav-link {{ (Request::is('admin')) ? 'active' : '' }}" href="{{ env('APP_URL') }}/admin">Admin List</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <form action="/auth/logout" method="POST" class="nav-item">
+            <form action="{{ env('APP_URL') }}/auth/logout" method="POST" class="nav-item">
                 @csrf
                 <button type="submit" class="btn nav-link nav-item">Logout</button>
             </form>
