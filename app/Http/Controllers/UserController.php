@@ -104,7 +104,11 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $image = explode($user->photo, env('APP_URL'));
-        Storage::delete($image[1]);
+        if (count($image) > 0) {
+            Storage::delete($image[1]);
+        } else {
+            Storage::delete($image);
+        }
         $user->delete();
         return redirect('/kelasku')->with('success', 'Data Deleted SUccessfully');
     }
