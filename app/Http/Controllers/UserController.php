@@ -15,14 +15,14 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all();
-        return view('Dashboard.web.home', [
+        return view('Dashboard.Web.home', [
             'users' => $data
         ]);
     }
 
     public function create()
     {
-        return view('Dashboard.web.create');
+        return view('Dashboard.Web.create');
     }
 
     public function show($id)
