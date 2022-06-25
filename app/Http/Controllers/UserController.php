@@ -85,7 +85,7 @@ class UserController extends Controller
         if ($request->photo != null) {
             // $data['photo'] = $request->file('photo')->store('images');
             if (str_contains($user->photo, env("APP_URL"))) {
-                $image = explode($user->photo, env('APP_URL'));
+                $image = explode(env('APP_URL') . '/', $user->photo);
                 Storage::delete($image[1]);
             } else {
                 Storage::delete($user->photo);
@@ -108,7 +108,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         if (str_contains($user->photo, env("APP_URL"))) {
-            $image = explode($user->photo, env('APP_URL'));
+            $image = explode(env('APP_URL') . '/', $user->photo);
             Storage::delete($image[1]);
         } else {
             Storage::delete($user->photo);
