@@ -82,10 +82,14 @@ class UserController extends Controller
             'password_confirmation' => 'nullable|same:password'
         ]);
         $user = User::findOrFail($id);
-        if ($request->hasFile('photo')) {
+        if ($request->photo != null) {
             // $data['photo'] = $request->file('photo')->store('images');
-            $image = explode($user->photo, env('APP_URL'));
-            Storage::delete($image[1]);
+            if (str_contains($user->photo, env("APP_URL"))) {
+                $image = explode($user->photo, env('APP_URL'));
+                Storage::delete($image[1]);
+            } else {
+                Storage::delete($user->photo);
+            }
             $data['photo'] = env('APP_URL') . '/' . $request->file('photo')->store('images');
         } else {
             $data['photo'] = $user->photo;
@@ -103,11 +107,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $image = explode($user->photo, env('APP_URL'));
-        if ($image[1]) {
+        if (str_contains($user->photo, env("APP_URL"))) {
+            $image = explode($user->photo, env('APP_URL'));
             Storage::delete($image[1]);
         } else {
-            Storage::delete($image);
+            Storage::delete($user->photo);
         }
         $user->delete();
         return redirect('/kelasku')->with('success', 'Data Deleted SUccessfully');
