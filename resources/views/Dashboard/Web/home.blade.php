@@ -34,8 +34,8 @@
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->liked_total }}</td>
                     <td>
-                        <a href="{{ env('APP_URL') }}kelasku/{{ $user->id }}" class="btn btn-success">Lihat</a>
-                        <a href="{{ env('APP_URL') }}kelasku/{{ $user->id }}/edit" class="btn btn-warning">Edit</a>
+                        <a href="{{ env('APP_URL') }}/kelasku/{{ $user->id }}" class="btn btn-success">Lihat</a>
+                        <a href="{{ env('APP_URL') }}/kelasku/{{ $user->id }}/edit" class="btn btn-warning">Edit</a>
                         <form action="{{ env('APP_URL') }}/admin/{{ $user->id }}" method="POST" class="d-inline-block">
                             @method('DELETE')
                             @csrf
