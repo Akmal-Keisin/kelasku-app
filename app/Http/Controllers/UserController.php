@@ -104,7 +104,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $image = explode($user->photo, env('APP_URL'));
-        if (count($image) > 0) {
+        if ($image[1]) {
             Storage::delete($image[1]);
         } else {
             Storage::delete($image);
