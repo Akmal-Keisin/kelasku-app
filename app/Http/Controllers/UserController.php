@@ -50,11 +50,9 @@ class UserController extends Controller
             ],
             'password_confirmation' => 'same:password'
         ]);
-        if ($request->hasFile('photo')) {
+        if ($request->photo != null) {
             $data['photo'] = env('APP_URL') . '/' . $request->file('photo')->store('images');
             // $data['photo'] = Storage::disk('public')->put($request->file('photo'), 'images');
-        } else {
-            $data['photo'] = 'images/default.png';
         }
         $data['password'] = Hash::make($request->password);
         User::create($data);
