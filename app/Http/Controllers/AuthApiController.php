@@ -47,8 +47,6 @@ class AuthApiController extends Controller
 
             if ($request->photo != null) {
                 $inputData['photo'] = env('APP_URL') . '/' . $request->file('photo')->store('images');
-            } else {
-                $inputData['photo'] = env('APP_URL') . 'public/images/default.png';
             }
             // $inputData['photo'] = Storage::put();
             $user = User::create($inputData);
@@ -78,23 +76,25 @@ class AuthApiController extends Controller
         // return $user;
         // return $request->all();
         try {
-            if (Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+            if ($user = User::where('phone', $request->phone)->first()) {
                 // dd('success');
-                $user = $request->user();
-                $data = [
-                    'status' => 200,
-                    'message' => 'Login Success',
-                    'token' => $user->createToken('Token Kelasku')->plainTextToken,
-                    'device_token' => $request->device_token,
-                    'data' => $user
-                ];
-                $deviceToken = [
-                    'user_id' => $user->id,
-                    'user_token' => $data['token'],
-                    'device_token' => $request->device_token,
-                ];
-                DeviceToken::create($deviceToken);
-                return response()->json($data, 200);
+                if (Hash::check($request->password, $user->password)) {
+                    $user = $request->user();
+                    $data = [
+                        'status' => 200,
+                        'message' => 'Login Success',
+                        'token' => $user->createToken('Token Kelasku')->plainTextToken,
+                        'device_token' => $request->device_token,
+                        'data' => $user
+                    ];
+                    $deviceToken = [
+                        'user_id' => $user->id,
+                        'user_token' => $data['token'],
+                        'device_token' => $request->device_token,
+                    ];
+                    DeviceToken::create($deviceToken);
+                    return response()->json($data, 200);
+                }
             } else {
                 $data = [
                     'status' => 400,
