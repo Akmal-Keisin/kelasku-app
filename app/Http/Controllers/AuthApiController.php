@@ -77,9 +77,7 @@ class AuthApiController extends Controller
         // return $request->all();
         try {
             if ($user = User::where('phone', $request->phone)->first()) {
-                // dd('success');
                 if (Hash::check($request->password, $user->password)) {
-                    $user = $request->user();
                     $data = [
                         'status' => 200,
                         'message' => 'Login Success',
