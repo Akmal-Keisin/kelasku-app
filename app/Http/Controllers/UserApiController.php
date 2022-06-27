@@ -129,7 +129,7 @@ class UserApiController extends Controller
                 'status' => '401',
                 'message' => 'Validation Error',
                 'data' => $validatedData->errors()
-            ], 401);
+            ], 400);
         }
 
         try {
@@ -160,11 +160,11 @@ class UserApiController extends Controller
             }
             $user->update($data);
             $response = [
-                'status' => 201,
+                'status' => 200,
                 'message' => 'Data Updated Successfully',
                 'data' => $user
             ];
-            return response()->json($response, 201);
+            return response()->json($response, 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 500,

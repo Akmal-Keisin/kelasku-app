@@ -51,7 +51,7 @@ class AuthApiController extends Controller
             // $inputData['photo'] = Storage::put();
             $user = User::create($inputData);
             $data = [
-                'status' => 201,
+                'status' => 200,
                 'message' => 'Data Registered Please Login First',
                 'data' => $user
             ];
