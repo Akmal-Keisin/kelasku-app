@@ -19,7 +19,7 @@ class AuthController extends Controller
         ]);
         if (Auth::attempt($credential)) {
             $request->session()->regenerate();
-            return redirect()->intended('kelasku');
+            return redirect()->intended('kelasku')->with("success", "Welcome Admin");
         }
         return back()->with('failed', 'Email Or Password Incorrect');
     }
