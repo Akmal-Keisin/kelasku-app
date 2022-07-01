@@ -143,9 +143,13 @@ class UserApiController extends Controller
             }
             $data = $request->all();
             if ($request->file('photo')) {
-                $image = explode($user->photo, env('APP_URL'));
-                Storage::delete($image[1]);
-                $data['photo'] = $request->file('photo')->store('images');
+                if (!is_null($user->photo)) {
+                    $image = explode($user->photo, env('APP_URL'));
+                    Storage::delete($image[1]);
+                    $data['photo'] = $request->file('photo')->store('images');
+                } else {
+                    $data['photo'] = env("APP_URL") . "/" . $request->file('photo')->store('images');
+                }
             } else {
                 $data['photo'] = $user->photo;
             }
