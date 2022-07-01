@@ -18,10 +18,10 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'password' => Hash::make("Users123"), // password
+            'class' => "XII MM " . (rand(1, 3)),
             'photo' => null,
             'phone' => $this->faker->randomDigitNotNull(),
             'bio' => $this->faker->paragraph(rand(1, 5)),
-            'remember_token' => Str::random(10),
         ];
     }
 
