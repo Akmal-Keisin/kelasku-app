@@ -19,7 +19,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'password' => Hash::make("Users123"), // password
             'photo' => null,
-            'phone_number' => $this->faker->randomDigitNotNull(),
+            'phone' => $this->faker->randomDigitNotNull(),
             'bio' => $this->faker->paragraph(rand(1, 5)),
             'remember_token' => Str::random(10),
         ];
