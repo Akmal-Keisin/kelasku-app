@@ -24,7 +24,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/kelasku', UserController::class);
+    Route::resource('/kelasku', UserController::class)->name("get", "home");
     Route::resource('/admin', AdminController::class)->except('show');
     Route::get('/', function () {
         return redirect('/kelasku');
