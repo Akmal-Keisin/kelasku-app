@@ -27,7 +27,7 @@ class UserApiController extends Controller
     {
         try {
             if (request('paginate')) {
-                $result = User::where('user_id', '!=', Auth::user()->id)->paginate(request('paginate'));
+                $result = User::where('id', '!=', Auth::user()->id)->paginate(request('paginate'));
                 if (count($result) == 0) {
                     $result = 'Data Is Empty';
                 }
@@ -37,7 +37,7 @@ class UserApiController extends Controller
                     'data' => $result
                 ];
             } else {
-                $result = User::where('user_id', '!=', Auth::user()->id)->get();
+                $result = User::where('id', '!=', Auth::user()->id)->get();
                 if (count($result) == 0) {
                     $result = 'Data Is Empty';
                 }
