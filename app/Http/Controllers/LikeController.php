@@ -7,6 +7,7 @@ use App\Models\Like;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LikeController extends Controller
 {
@@ -102,6 +103,7 @@ class LikeController extends Controller
         $user_liked['like_total'] = $like_count;
         // Notification end
         // return response()->json($response, 200);
+        Log::debug($result);
 
         return response()->json([
             'status' => 201,
