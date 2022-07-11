@@ -76,7 +76,8 @@ class AuthApiController extends Controller
         // return $user;
         // return $request->all();
         try {
-            if ($user = User::where('phone', $request->phone)->first()) {
+            $user =  User::where('phone', $request->phone)->first();
+            if ($user) {
                 if (Hash::check($request->password, $user->password)) {
                     $data = [
                         'status' => 200,
