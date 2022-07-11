@@ -83,7 +83,7 @@ class LikeController extends Controller
         ];
 
         $data['title'] = "kelasku";
-        $data['message'] = Auth::user()->name . " Menyukai Anda";
+        $data['body'] = Auth::user()->name . " Menyukai Anda";
         $fields = [
             'registration_ids' => $deviceToken,
             'data' => $data,
